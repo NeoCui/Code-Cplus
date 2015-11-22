@@ -25,6 +25,7 @@ typedef struct MyMessage{
     int ID;
     char info[256];
 }MyMessage,*pMyMessage;
+
 int main(int argc, char* argv[]) {
     int sockfd, recvbytes;
     //char buf[MAXDATASIZE];
