@@ -1,18 +1,49 @@
-#include<iostream>
-#include<string>
-#include<vector>
+#include <iostream>
+#include <string>
 
 using namespace std;
+#define MAX 10
+#define INF 0
 
-int main(){
-	int T=0,cnt_T=0;
-	vector<string> input_str;
-	vector<int> input_key;
-	string line;
-	cin>>T;
-	for(cnt_T0;cnt_T<T:++cnt_T){
-		getline(cin,line);
-		input_str.push_back(line);
+int t[MAX][MAX];
+bool flag[MAX];
+int dis=INF, v;
 
-	return 0;
+void DFS(int sum, int pos, int n)
+{
+    if(sum>dis)
+    {
+        dis = sum;
+        v = pos;
+    }
+    flag[pos] = true;
+    for(int i=1; i<=n; ++i)
+    {
+        if(t[pos][i]!=0 && !flag[i])
+        {
+            DFS(sum+t[pos][i],i,n);
+        }
+    }
+}
+int main()
+{
+    int T;
+    cin>>T;
+    int count=T;
+    while(count--){
+        int u, v, w;
+        cin>>u>>v>>w;
+        t[u][v] = t[v][u] = w;
+    }
+    
+    DFS(0,1,T);
+    
+    dis = INF;
+    memset(flag,0,sizeof(flag));
+    DFS(0,v,T);
+      
+    int ret;
+    ret=dis*10+(1+dis)*dis/2;
+    cout<<ret<<endl;
+    return 0 ;
 }

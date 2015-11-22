@@ -1,34 +1,25 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
-
+#include<iostream>
 using namespace std;
-
-const int N=1e6;
-const int mod=1e9+7;
-long long  s[N];//×¢Òâlong long 
-void Init()
-{
-    s[0] = s[1] = 1;
-    for (int i=2; i<=N; i++)
-        s[i]=(s[i-1]+(i-1)*s[i-2])%mod;
-}
-
-int main()
-{
-		vector<int> n;
-    Init();
-    int T,t_n,cnt_T=1;
-		int cnt=0;
-		cin>>T;
-		for(cnt=0;cnt<T;++cnt){
-			cin>>t_n;
-			n.push_back(t_n);
-		}
-		for(cnt_T=0;cnt_T<T;++cnt_T){
-			t_n=n[cnt_T];
-			cout<<"Case #"<<cnt_T+1<<":"<<endl;
-			cout<<s[t_n]<<endl;
+int main(){
+    long long ch[13];
+    ch[1]=1;
+    for(int i=2;i<=12;i++){
+        ch[i]=ch[i-1]*i;
+    }
+    char str[13];
+    int T;
+    scanf("%d",&T);
+    while(T--){
+        scanf("%s",str+1);
+        long long sum=0;
+        for(int i=1;i<=12;i++){
+            int k=0;
+            for(int j=i+1;j<=12;j++){
+                if(str[i]>str[j]) k++;
+            }
+            sum+=ch[12-i]*k;
+        }
+        cout<<sum+1<<endl;
     }
     return 0;
 }
